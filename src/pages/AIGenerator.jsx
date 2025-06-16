@@ -18,6 +18,7 @@ import { verificarERegistrarUso } from "../utils/usoDiario";
 import { useAuth } from "../contexts/AuthContext";
 
 const AIGenerator = () => {
+  const { user } = useAuth(); // Pega o usuário logado
   const { type } = useParams();
   const { user, userPlan, canUseFeature, incrementDailyUsage } = useAuth();
   const { toast } = useToast();
