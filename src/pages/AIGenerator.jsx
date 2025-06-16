@@ -64,16 +64,45 @@ const AIGenerator = () => {
   const Icon = currentGenerator?.icon;
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!canUseFeature()) {
-      toast({
-        title: "Limite atingido",
-        description: "Você atingiu o limite diário do plano gratuito. Faça upgrade para uso ilimitado.",
-        variant: "destructive",
-      });
-      return;
-    }
+  e.preventDefault();
+
+  try {
+    // Verifica e registra uso diário
+    await verificarERegistrarUso(user.uid);
+  } catch (err) {
+    // Bloqueia e mostra alerta
+    toast({
+      title: "Limite atingido",
+      description: err.message,
+      variant: "destructive",
+    });
+    return;
+  }
+
+  setLoading(true);
+  // Aqui continua o código que você já tinha
+  try {
+    const response = await fetch("/api/groq", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt,
+        model,
+        temperature,
+        max_tokens,
+      }),
+    });
+
+    const data = await response.json();
+    setOutput(data.result);
+  } catch (error) {
+    console.error("Erro ao gerar resposta:", error);
+  }
+
+  setLoading(false);
+};
 
     setLoading(true);
     
