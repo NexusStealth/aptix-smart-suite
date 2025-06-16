@@ -1,4 +1,4 @@
-import express from 'express';
+euimport express from 'express';
 import Stripe from 'stripe';
 import bodyParser from 'body-parser';
 import admin from 'firebase-admin';
@@ -109,4 +109,5 @@ app.get("/", (req, res) => {
   res.send("Servidor Aptix ON");
 });
 
-app.listen(3000, () => console.log("🔥 Backend online em http://localhost:3000"));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`🔥 Backend online na porta ${PORT}`));
