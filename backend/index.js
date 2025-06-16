@@ -1,8 +1,8 @@
-euimport express from 'express';
-import Stripe from 'stripe';
-import bodyParser from 'body-parser';
-import admin from 'firebase-admin';
-import dotenv from 'dotenv';
+const express from 'express';
+const Stripe from 'stripe';
+const bodyParser from 'body-parser';
+const admin from 'firebase-admin';
+const dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
