@@ -1,47 +1,29 @@
-// src/contexts/AuthContext.tsx
-import { createContext, useContext, useEffect, useState } from "react";
-import { auth, provider, db } from "../lib/firebase";
-import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth, db, provider } from "../firebase"; // Ajuste o caminho se necessário
+import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
-const AuthContext = createContext<any>(null);
+// ...
 
-export const AuthProvider = ({ children }: any) => {
-  const [user, setUser] = useState<any>(null);
+const signInWithGoogle = async () => {
+  const result = await signInWithPopup(auth, provider);
+  const user = result.user;
 
-  const signInWithGoogle = async () => {
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
+  // Referência ao documento do usuário
+  const userRef = doc(db, "users", user.uid);
+  const docSnap = await getDoc(userRef);
 
-    await setDoc(doc(db, "users", user.uid), {
+  // Se não existir, criar
+  if (!docSnap.exists()) {
+    await setDoc(userRef, {
       uid: user.uid,
+      nome: user.displayName || "Usuário",
       email: user.email,
-      nome: user.displayName,
       plano: "free",
-      assinaturaAtiva: false
+      assinaturaAtiva: false,
+      criadoEm: serverTimestamp()
     });
-
-    setUser(user);
-  };
-
-  const logout = async () => {
-    await signOut(auth);
-    setUser(null);
-  };
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user || null);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  return (
-    <AuthContext.Provider value={{ user, signInWithGoogle, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    console.log("✅ Novo usuário salvo no Firestore");
+  } else {
+    console.log("ℹ️ Usuário já existe no Firestore");
+  }
 };
-
-export const useAuth = () => useContext(AuthContext);
