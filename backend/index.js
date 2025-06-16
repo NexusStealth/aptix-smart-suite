@@ -73,6 +73,37 @@ app.post('/webhook/stripe', express.raw({ type: 'application/json' }), async (re
   res.status(200).json({ received: true });
 });
 
+// ✅ NOVA ROTA DE CHECKOUT ADICIONADA AQUI:
+app.post("/create-checkout-session", async (req, res) => {
+  const { plan, email } = req.body;
+
+  const priceId = {
+    pro_mensal: "price_1RaTtDAgU97RTqe1bO4k93va",
+    pro_anual: "price_1RaTteAgU97RTqe1hh5t7WKn"
+  }[plan];
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
+        },
+      ],
+      mode: "subscription",
+      success_url: "http://localhost:3000/sucesso",  // Substituir depois pelo domínio real
+      cancel_url: "http://localhost:3000/cancelado", // Substituir depois pelo domínio real
+      customer_email: email,
+    });
+
+    res.json({ url: session.url });
+  } catch (error) {
+    console.error("Erro ao criar sessão:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.get("/", (req, res) => {
   res.send("Servidor Aptix ON");
 });
