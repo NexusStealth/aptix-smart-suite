@@ -1,28 +1,19 @@
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-
-// TODO: Configurar suas credenciais do Firebase
-// Substitua pelos valores do seu projeto Firebase
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN", 
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBXOkx58VX_reKBdUAVQ8xTtJoNr0TPVsM",
+  authDomain: "aptix-80019.firebaseapp.com",
+  projectId: "aptix-80019",
+  storageBucket: "aptix-80019.appspot.com",
+  messagingSenderId: "1013152306674",
+  appId: "1:1013152306674:web:34a6506d662baf68ec476b",
+  measurementId: "G-SXWSL2SBTT"
 };
 
-// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 
-// Autenticação
 export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
-
-// Firestore
+export const provider = new GoogleAuthProvider();
 export const db = getFirestore(app);
-
-// Export das funções de auth
-export { signInWithPopup, signOut, onAuthStateChanged };
