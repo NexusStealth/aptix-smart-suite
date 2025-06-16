@@ -39,8 +39,9 @@ app.post('/webhook/stripe', express.raw({ type: 'application/json' }), async (re
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
     const customerEmail = session.customer_email;
-    const priceId = session.amount_total ? session.amount_total : session.display_items?.[0]?.price?.id;
-
+    const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 1 });
+const priceId = lineItems.data[0]?.price?.id;
+    
     try {
       const usersRef = db.collection('users').where('email', '==', customerEmail);
       const snap = await usersRef.get();
