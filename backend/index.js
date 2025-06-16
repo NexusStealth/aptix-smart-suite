@@ -50,9 +50,9 @@ app.post('/webhook/stripe', express.raw({ type: 'application/json' }), async (re
         let plano;
 
         if (session.mode === 'subscription' || priceId === "price_1RaTtDAgU97RTqe1bO4k93va") {
-          plano = 'pro_mensal';
+          plano = 'miunthly';
         } else if (priceId === "price_1RaTteAgU97RTqe1hh5t7WKn") {
-          plano = 'pro_anual';
+          plano = 'yearly';
         }
 
         await userDoc.ref.update({
