@@ -1,4 +1,4 @@
-const express from 'express';
+const express = require('express');
 const Stripe from 'stripe';
 const bodyParser from 'body-parser';
 const admin from 'firebase-admin';
