@@ -1,7 +1,7 @@
 
 // Serviço para integração com Groq API
 // TODO: Configurar sua API key do Groq
-const GROQ_API_KEY = 'YOUR_GROQ_API_KEY'; // Substitua pela sua chave
+const GROQ_API_KEY = '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'; // Substitua pela sua chave
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 class AIService {
