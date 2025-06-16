@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: aptix-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: STRIPE_SECRET_KEY
+        value: sk_test_sua_chave
+      - key: STRIPE_WEBHOOK_SECRET
+        value: whsec_sua_chave
