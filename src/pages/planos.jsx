@@ -14,10 +14,11 @@ export default function Planos() {
       ],
       destaque: false,
       cor: "border-gray-400",
+      link: null,
     },
     {
-      nome: "Premium",
-      preco: "R$ 19,90/mês",
+      nome: "Premium Mensal",
+      preco: "R$ 10/mês",
       beneficios: [
         "Respostas ilimitadas",
         "IA com prioridade e mais recursos",
@@ -26,6 +27,20 @@ export default function Planos() {
       ],
       destaque: true,
       cor: "border-yellow-500",
+      link: "https://buy.stripe.com/7sYaEWb9a9RD45sfSBd7q00",
+    },
+    {
+      nome: "Premium Anual",
+      preco: "R$ 100/ano",
+      beneficios: [
+        "Respostas ilimitadas",
+        "Acesso total por 12 meses",
+        "Suporte prioritário",
+        "Todas as atualizações inclusas",
+      ],
+      destaque: true,
+      cor: "border-yellow-500",
+      link: "https://buy.stripe.com/14AaEW7WY8NzeK6cGpd7q01",
     },
   ];
 
@@ -34,7 +49,7 @@ export default function Planos() {
       <h1 className="text-3xl font-bold text-center mb-8">
         Escolha seu plano
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {planos.map((plano) => (
           <Card
             key={plano.nome}
@@ -45,7 +60,7 @@ export default function Planos() {
                 {plano.nome}
                 {plano.destaque && (
                   <span className="ml-2 inline-block text-yellow-500 font-bold">
-                    Destaque
+                    ★
                   </span>
                 )}
               </h2>
@@ -58,13 +73,20 @@ export default function Planos() {
                   </li>
                 ))}
               </ul>
-              {plano.nome === "Free" ? (
+              {plano.link ? (
+                <a
+                  href={plano.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full block"
+                >
+                  <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white">
+                    Assinar agora
+                  </Button>
+                </a>
+              ) : (
                 <Button variant="outline" disabled className="w-full">
                   Plano Atual
-                </Button>
-              ) : (
-                <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white">
-                  Assinar agora
                 </Button>
               )}
             </CardContent>
@@ -73,4 +95,4 @@ export default function Planos() {
       </div>
     </div>
   );
-                  }
+              }
