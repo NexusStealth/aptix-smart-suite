@@ -1,73 +1,261 @@
-# Welcome to your Lovable project
 
-## Project info
+# 🚀 Aptix - SaaS Inteligente
 
-**URL**: https://lovable.dev/projects/d658a208-4a4f-4797-bdf9-4d0ba061c9a5
+## Sobre o Projeto
 
-## How can I edit this code?
+O **Aptix** é uma plataforma SaaS completa e moderna que utiliza Inteligência Artificial para aumentar a produtividade dos usuários. Com design profissional e funcionalidades avançadas, oferece desde geração de currículos até controle financeiro pessoal.
 
-There are several ways of editing your application.
+## ✨ Funcionalidades Principais
 
-**Use Lovable**
+### 🤖 Geradores de IA
+- **Currículos Profissionais**: Crie currículos impressionantes com IA
+- **Cartas de Apresentação**: Cartas personalizadas e impactantes
+- **Atendimento ao Cliente**: Respostas profissionais para seu negócio
+- **Documentos Inteligentes**: Contratos, recibos e outros documentos
+- **Bot IA Universal**: Assistente inteligente para qualquer tarefa
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d658a208-4a4f-4797-bdf9-4d0ba061c9a5) and start prompting.
+### 💰 Finanças Pessoais
+- Controle de receitas e despesas
+- Categorização automática
+- Relatórios detalhados
+- Gráficos e estatísticas
 
-Changes made via Lovable will be committed automatically to this repo.
+### 🔐 Autenticação e Segurança
+- Login com Google (Firebase Auth)
+- Dados protegidos e criptografados
+- Controle de acesso baseado em planos
 
-**Use your preferred IDE**
+### 💳 Sistema de Pagamentos
+- **Plano Gratuito**: 5 usos por dia
+- **Plano Mensal**: Uso ilimitado por R$ 29,90/mês
+- **Plano Anual**: Uso ilimitado por R$ 19,90/mês (33% desconto)
+- Integração completa com Stripe
+- Portal do cliente para gerenciar assinaturas
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 📱 PWA (Progressive Web App)
+- Instalável em dispositivos móveis
+- Funciona offline
+- Notificações push
+- Interface responsiva
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🛠️ Tecnologias Utilizadas
 
-Follow these steps:
+### Frontend
+- **React 18** com Vite
+- **TailwindCSS** para estilização
+- **Shadcn/UI** para componentes
+- **Firebase** para autenticação
+- **React Router** para navegação
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Backend
+- **Node.js** com Express
+- **Stripe** para pagamentos
+- **Firebase Admin** para gerenciamento
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### IA e APIs
+- **Groq API** com modelo Mixtral-8x7b
+- Geração de conteúdo inteligente
+- Respostas contextuais
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Banco de Dados
+- **Firebase Firestore** para dados em tempo real
+- Coleções otimizadas para performance
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## 🚀 Como Executar
+
+### Pré-requisitos
+- Node.js 18+ instalado
+- Conta no Firebase
+- Conta no Stripe
+- Chave da API Groq
+
+### 1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/aptix.git
+cd aptix
+```
+
+### 2. Configure o Frontend
+```bash
+# Instalar dependências
+npm install
+
+# Configurar Firebase
+# Edite src/services/firebase.js com suas credenciais
+
+# Configurar Groq API
+# Edite src/services/aiService.js com sua chave da API
+```
+
+### 3. Configure o Backend
+```bash
+cd backend
+
+# Instalar dependências
+npm install
+
+# Configurar variáveis de ambiente
+cp .env.example .env
+# Edite o arquivo .env com suas credenciais
+```
+
+### 4. Executar o projeto
+```bash
+# Terminal 1 - Frontend
+npm run dev
+
+# Terminal 2 - Backend
+cd backend
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 📋 Configurações Necessárias
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Firebase
+1. Crie um projeto no [Firebase Console](https://console.firebase.google.com)
+2. Ative Authentication com Google
+3. Configure Firestore Database
+4. Baixe as credenciais e configure no projeto
 
-**Use GitHub Codespaces**
+### Stripe
+1. Crie uma conta no [Stripe](https://stripe.com)
+2. Configure produtos e preços
+3. Configure webhooks para: `/api/stripe/webhook`
+4. Eventos necessários:
+   - `checkout.session.completed`
+   - `invoice.payment_succeeded`
+   - `customer.subscription.deleted`
+   - `customer.subscription.updated`
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Groq API
+1. Cadastre-se em [Groq](https://groq.com)
+2. Obtenha sua chave da API
+3. Configure no arquivo de serviços
 
-## What technologies are used for this project?
+## 📱 PWA Setup
 
-This project is built with:
+O aplicativo já está configurado como PWA com:
+- `manifest.json` configurado
+- Service Worker ativo
+- Ícones em múltiplos tamanhos
+- Modo standalone
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Para instalar:
+1. Acesse o app no navegador
+2. Clique em "Instalar" quando aparecer a opção
+3. O app será instalado como aplicativo nativo
 
-## How can I deploy this project?
+## 🎨 Design System
 
-Simply open [Lovable](https://lovable.dev/projects/d658a208-4a4f-4797-bdf9-4d0ba061c9a5) and click on Share -> Publish.
+### Cores Principais
+- **Primary**: #6366f1 (Indigo)
+- **Secondary**: #8b5cf6 (Purple)
+- **Success**: #10b981 (Green)
+- **Warning**: #f59e0b (Orange)
+- **Error**: #ef4444 (Red)
 
-## Can I connect a custom domain to my Lovable project?
+### Tipografia
+- **Fonte**: Inter (Google Fonts)
+- **Pesos**: 300, 400, 500, 600, 700
 
-Yes, you can!
+### Componentes
+- Design system consistente
+- Componentes reutilizáveis
+- Tema claro/escuro
+- Animações suaves
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📊 Estrutura do Banco de Dados
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Coleção: users
+```javascript
+{
+  uid: string,
+  email: string,
+  name: string,
+  photoURL: string,
+  plan: 'free' | 'monthly' | 'yearly',
+  planExpiry: timestamp,
+  dailyUsage: number,
+  dailyUsageReset: string,
+  stripeCustomerId: string,
+  subscriptionId: string,
+  createdAt: timestamp,
+  updatedAt: timestamp
+}
+```
+
+### Coleção: history
+```javascript
+{
+  userId: string,
+  type: 'curriculum' | 'cover-letter' | 'customer-service' | 'documents' | 'bot',
+  input: object,
+  output: string,
+  createdAt: timestamp
+}
+```
+
+### Coleção: transactions
+```javascript
+{
+  userId: string,
+  type: 'income' | 'expense',
+  amount: number,
+  description: string,
+  category: string,
+  date: string,
+  createdAt: timestamp
+}
+```
+
+## 🔧 Scripts Disponíveis
+
+### Frontend
+- `npm run dev`: Desenvolvimento
+- `npm run build`: Build para produção
+- `npm run preview`: Preview da build
+
+### Backend
+- `npm run dev`: Desenvolvimento com nodemon
+- `npm start`: Produção
+
+## 📈 Roadmap
+
+### Próximas Funcionalidades
+- [ ] Exportação PDF dos documentos gerados
+- [ ] Integrações com mais APIs de IA
+- [ ] Dashboard de analytics avançado
+- [ ] Sistema de templates personalizados
+- [ ] API pública para desenvolvedores
+- [ ] Modo colaborativo
+- [ ] Integração com Google Drive/Dropbox
+
+### Melhorias Técnicas
+- [ ] Testes automatizados
+- [ ] CI/CD pipeline
+- [ ] Monitoramento e logs
+- [ ] Cache inteligente
+- [ ] Otimizações de performance
+
+## 🤝 Contribuindo
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 📞 Suporte
+
+Para suporte e dúvidas:
+- 📧 Email: suporte@aptix.com
+- 💬 Discord: [Comunidade Aptix](https://discord.gg/aptix)
+- 📖 Documentação: [docs.aptix.com](https://docs.aptix.com)
+
+---
+
+**Desenvolvido com ❤️ pela equipe Aptix**
