@@ -14,6 +14,8 @@ import { useToast } from '../hooks/use-toast';
 import aiService from '../services/aiService';
 import { doc, addDoc, collection } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import { verificarERegistrarUso } from "../utils/usoDiario";
+import { useAuth } from "../contexts/AuthContext";
 
 const AIGenerator = () => {
   const { type } = useParams();
