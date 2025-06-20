@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -18,7 +17,7 @@ import { verificarERegistrarUso } from "../utils/usoDiario";
 import { useAuth } from "../contexts/AuthContext";
 
 const AIGenerator = () => {
-  const { user } = useAuth(); // Pega o usuário logado
+  const { user, userPlan, canUseFeature, incrementDailyUsage } = useAuth();
   const { type } = useParams();
   const { user, userPlan, canUseFeature, incrementDailyUsage } = useAuth();
   const { toast } = useToast();
