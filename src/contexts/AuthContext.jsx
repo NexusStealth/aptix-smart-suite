@@ -1,5 +1,5 @@
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, db, provider } from "../firebase"; // Ajuste o caminho se necessário
+import { auth, db, provider } from "../services/firebase"; // Ajuste o caminho se necessário
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 // ...
