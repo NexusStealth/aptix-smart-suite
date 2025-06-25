@@ -1,10 +1,9 @@
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, db, provider } from "../services/firebase"; // Ajuste o caminho se necessário
+import { auth, db, provider } from "../services/firebase";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
-// ...
-
-const signInWithGoogle = async () => {
+// Função de login com Google
+export const signInWithGoogle = async () => {
   const result = await signInWithPopup(auth, provider);
   const user = result.user;
 
@@ -20,7 +19,7 @@ const signInWithGoogle = async () => {
       email: user.email,
       plano: "free",
       assinaturaAtiva: false,
-      criadoEm: serverTimestamp()
+      criadoEm: serverTimestamp(),
     });
     console.log("✅ Novo usuário salvo no Firestore");
   } else {
