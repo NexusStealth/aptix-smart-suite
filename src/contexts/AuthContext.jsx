@@ -1,28 +1,29 @@
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, db, provider } from "../services/firebase";
-import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { createContext, useContext, useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../services/firebase";
 
-// Função de login com Google
-export const signInWithGoogle = async () => {
-  const result = await signInWithPopup(auth, provider);
-  const user = result.user;
+const AuthContext = createContext();
 
-  // Referência ao documento do usuário
-  const userRef = doc(db, "users", user.uid);
-  const docSnap = await getDoc(userRef);
+export const AuthProvider = ({ children }) => {
+  const [usuario, setUsuario] = useState(null);
+  const [carregando, setCarregando] = useState(true);
 
-  // Se não existir, criar
-  if (!docSnap.exists()) {
-    await setDoc(userRef, {
-      uid: user.uid,
-      nome: user.displayName || "Usuário",
-      email: user.email,
-      plano: "free",
-      assinaturaAtiva: false,
-      criadoEm: serverTimestamp(),
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUsuario(user);
+      setCarregando(false);
     });
-    console.log("✅ Novo usuário salvo no Firestore");
-  } else {
-    console.log("ℹ️ Usuário já existe no Firestore");
-  }
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ usuario }}>
+      {!carregando && children}
+    </AuthContext.Provider>
+  );
+};
+
+// ✅ ESSA PARTE É O QUE ESTÁ FALTANDO NO SEU PROJETO
+export const useAuth = () => {
+  return useContext(AuthContext);
 };
