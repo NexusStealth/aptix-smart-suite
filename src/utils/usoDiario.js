@@ -1,7 +1,7 @@
 // src/utils/usoDiario.js
 
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../services/firebase";
 
 export async function verificarERegistrarUso(uid) {
   const userRef = doc(db, "users", uid);
