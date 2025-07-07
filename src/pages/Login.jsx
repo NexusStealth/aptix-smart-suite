@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -23,9 +24,20 @@ const Login = () => {
       navigate('/');
     } catch (error) {
       console.error("Erro detalhado no login:", error);
+      
+      let errorMessage = "Ocorreu um erro inesperado";
+      
+      if (error.message.includes('Domínio não autorizado')) {
+        errorMessage = "Este domínio não está configurado no Firebase. Configure os domínios autorizados no Firebase Console.";
+      } else if (error.code === 'auth/popup-closed-by-user') {
+        errorMessage = "Login cancelado pelo usuário";
+      } else if (error.code === 'auth/popup-blocked') {
+        errorMessage = "Popup bloqueado pelo navegador. Permita popups para este site.";
+      }
+      
       toast({
         title: "Erro no login",
-        description: error.message || "Ocorreu um erro inesperado",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

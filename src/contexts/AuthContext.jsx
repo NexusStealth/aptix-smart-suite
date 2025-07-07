@@ -43,10 +43,21 @@ export const AuthProvider = ({ children }) => {
 
   const signInWithGoogle = async () => {
     try {
+      // Adicionar configurações extras para o provider
+      provider.setCustomParameters({
+        prompt: 'select_account'
+      });
+      
       const result = await signInWithPopup(auth, provider);
       return result.user;
     } catch (error) {
       console.error("Erro no login:", error);
+      
+      // Tratamento específico para erro de domínio não autorizado
+      if (error.code === 'auth/unauthorized-domain') {
+        throw new Error('Domínio não autorizado. Configure os domínios autorizados no Firebase Console.');
+      }
+      
       throw error;
     }
   };
