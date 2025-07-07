@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -23,9 +22,10 @@ const Login = () => {
       });
       navigate('/');
     } catch (error) {
+      console.error("Erro detalhado no login:", error);
       toast({
         title: "Erro no login",
-        description: error.message,
+        description: error.message || "Ocorreu um erro inesperado",
         variant: "destructive",
       });
     } finally {
